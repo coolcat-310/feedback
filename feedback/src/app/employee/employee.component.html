@@ -1,4 +1,12 @@
-<p>
-  employee works!
-</p>
+<li *ngFor="let employee of employees">
+<div class="card" style="width: 18rem;">
+
+  <img class="card-img-top" src={{employee.avatar}} alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{employee.lastName}}, {{employee.firstName}}</h5>
+    <p class="card-text">{{employee.comments}}</p>
+    <a routerLink="/question" class="btn btn-primary">Provide Feedback</a>
+  </div>
+</div>
+</li>
 
