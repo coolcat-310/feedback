@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from "./employee.model";
+
+
 import * as faker from 'faker';
 
 @Component({
@@ -9,7 +11,7 @@ import * as faker from 'faker';
 })
 export class EmployeeComponent implements OnInit {
   employees: Employee[];
-
+  message: string;
 
   constructor() {
     this.employees = [
@@ -32,9 +34,12 @@ export class EmployeeComponent implements OnInit {
       this.employees[i].avatar = faker.image.avatar();
       this.employees[i].firstName = faker.name.firstName();
       this.employees[i].lastName = faker.name.lastName();
+      this.employees[i].id = '/question/' + this.employees[i].lastName;
     }
 
   }
+
+
 
   sortEmployees(){
     this.employees.sort(function (a,b) {
