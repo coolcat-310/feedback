@@ -12,6 +12,9 @@ import * as faker from 'faker';
 export class EmployeeComponent implements OnInit {
   employees: Employee[];
   message: string;
+  newFirstName: string;
+  newLastName: string;
+  newComment: string;
 
   constructor() {
     this.employees = [
@@ -26,7 +29,6 @@ export class EmployeeComponent implements OnInit {
   ngOnInit() {
     this.addAvatar();
     this.sortEmployees();
-    //console.log(this.employees);
   }
 
   addAvatar(){
@@ -38,7 +40,6 @@ export class EmployeeComponent implements OnInit {
     }
 
   }
-
 
 
   sortEmployees(){
@@ -53,6 +54,43 @@ export class EmployeeComponent implements OnInit {
       }
       return 0;
     })
+  }
+
+  newEmployee(){
+    /***
+     * The function adds a new employee based on the user's input.
+     */
+
+    const newEmployee = new Employee(this.newFirstName, this.newLastName);
+
+    newEmployee.comments = this.newComment;
+    newEmployee.avatar = faker.image.avatar();
+    newEmployee.id = '/question/' + this.newLastName;
+    // @ts-ignore
+    document.getElementById('newEmployeeForm').reset();
+    this.employees.push(newEmployee);
+    this.sortEmployees();
+
+  }
+
+  deleteEmployee(lastname, firstname){
+    console.log('click on delete Employee');
+    console.log('delete', lastname + ', ' +firstname);
+    this.employees.splice(this.employees.findIndex(x => x.firstName == firstname && x.lastName == lastname), 1)
+
+  }
+
+
+  storeFirstName(firstName){
+    this.newFirstName = firstName.viewModel;
+  }
+
+  storeLastName(lastName){
+    this.newLastName = lastName.viewModel;
+  }
+
+  storeComment(comment){
+    this.newComment = comment.viewModel;
   }
 
 }
