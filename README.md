@@ -1,6 +1,6 @@
 # Front Page
 
-##The home page
+## The home page
 
 <img width="1113" alt="screen shot 2019-02-13 at 10 21 10 pm" src="https://user-images.githubusercontent.com/16736074/52767074-2e725200-2fde-11e9-9ceb-cc44c92c8df5.png">
 
