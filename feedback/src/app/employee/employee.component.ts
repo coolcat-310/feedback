@@ -15,6 +15,7 @@ export class EmployeeComponent implements OnInit {
   newFirstName: string;
   newLastName: string;
   newComment: string;
+  emptyString: string = '';
 
   constructor() {
     this.employees = [
@@ -66,8 +67,16 @@ export class EmployeeComponent implements OnInit {
     newEmployee.comments = this.newComment;
     newEmployee.avatar = faker.image.avatar();
     newEmployee.id = '/question/' + this.newLastName;
-    // @ts-ignore
-    document.getElementById('newEmployeeForm').reset();
+
+    var inputElement = <HTMLInputElement>document.getElementById('firstName');
+    inputElement.value = this.emptyString;
+
+    inputElement = <HTMLInputElement>document.getElementById('lastName');
+    inputElement.value = this.emptyString;
+
+    inputElement = <HTMLInputElement>document.getElementById('comment');
+    inputElement.value = this.emptyString;
+
     this.employees.push(newEmployee);
     this.sortEmployees();
 

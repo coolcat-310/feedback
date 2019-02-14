@@ -1,13 +1,51 @@
-<form>
-  <div class="form-group">
-    <label for="firstName">First Name</label>
-    <input required ngModel name="firstName" id="firstName" type="text" class="form-control" #firstName="ngModel"
-           (change)="log(firstName)">
-    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required.</div>
+<div class="container">
+  <div class="text-center">
+    <br>
+    <h1>Feedback Questionaire</h1>
+    <p>
+      <small>Please answer the following questions.</small>
+    </p>
+    <br>
   </div>
-  <div class="form-group">
-    <label for="comment">Comment</label>
-    <textarea ngModel name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
+
+  <form id="questionaire">
+    <div class="form-group">
+      <label for="q1">Question 1: What are the employee's greatest strengths?</label>
+      <input ngModel name="q1" id="q1" type="text" class="form-control" #q1="ngModel" (change)="storeQ1(q1)">
+    </div>
+
+    <div class="form-group">
+      <label for="q2">Question 2: Which areas does the employee need to improve?</label>
+      <input ngModel name="q2" id="q2" type="text" class="form-control" #q2="ngModel" (change)="storeQ2(q2)">
+    </div>
+
+    <div class="form-group">
+      <label for="q3">Question 3: Has the employee taken any initiative in the company?</label>
+      <input ngModel name="q3" id="q3" type="text" class="form-control" #q3="ngModel" (change)="storeQ3(q3)">
+    </div>
+
+  </form>
+  <form [formGroup]="form">
+    <label for="q4">Question 4: Please Rate employee's performance.</label>
+    <div class="row">
+      <div class="col col-sm-4">
+      <input type="radio" name="q4" id="q4" formControlName="q4" value="belowAverage"> Below Average
+      </div>
+      <div class="col col-sm-4">
+      <input type="radio" name="q4" formControlName="q4" value="average"> Average
+      </div>
+      <div class="col col-sm-4">
+      <input type="radio" name="q4" formControlName="q4" value="aboveAverage"> Above Average
+      </div>
+    </div>
+  </form>
+  <hr style="border: 1px solid gray"/>
+  <div class="row">
+    <div class="col col-lg-6">
+      <button class="btn btn-primary" type="submit" style="float: right" (click)="sumbitFeedback()">Submit</button>
+    </div>
+    <div class="col col-lg-6">
+      <button class="btn btn-danger" type="submit" style="float:left" (click)="cancelFeedback()">Cancel</button>
+    </div>
   </div>
-  <button class="btn btn-primary">Submit</button>
-</form>
+</div>
