@@ -1,4 +1,59 @@
-# Front Page
+# Employee Feed
+
+This application is meant to be a method for a supervisor to submit feedback to their subordinates.
+
+# To start
+
+Make sure your environment has node installed
+
+```$xslt
+Juans-MacBook-Pro:feedback juannavarrete$ node -v
+v10.6.0
+```
+
+Also since the Front-end is developed in Angular make sure to install the CLI to run the application locally
+
+```$xslt
+npm install -g @angular/cli
+```
+
+Once you clone the repo, goto both directories (middleware & feedback) and install their dependancies
+
+```$xslt
+cd feedback
+npm install
+```
+
+then...
+
+```$xslt
+cd middleware
+npm install
+```
+
+## Running the application locally
+
+### Angular Front-End
+
+To launch the Front end go into the 'feedback' directory and enter the following command...
+
+```$xslt
+ng serve
+```
+
+Then on the browser goto http://localhost:4200/ 
+
+
+### Middleware
+
+To launch the middleware goto the 'middleware' directory and enter the following command...
+
+```$xslt
+nodemon
+```
+
+The middleware would be activated and actively listening on port 3000.
+
 
 ## The home page
 
