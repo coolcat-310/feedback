@@ -6,7 +6,7 @@ export class Employee {
   comments: string;
   feedback: {};
   avatar: string;
-  id: string;
+  id = 0;
 
   constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
