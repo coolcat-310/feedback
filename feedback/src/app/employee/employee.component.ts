@@ -114,6 +114,8 @@ export class EmployeeComponent implements OnInit {
           let newEmployee = new Employee(this.data[i].firstName, this.data[i].lastName);
           newEmployee.avatar = this.data[i].avatar;
           newEmployee.id = this.data[i].id;
+          newEmployee.comments = this.data[i].comment;
+          newEmployee.feedback = this.data[i].feedback;
           arr.push(newEmployee);
         }
         this.employees = arr;

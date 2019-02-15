@@ -19,31 +19,36 @@ var person = [
         id: 1,
         firstName: 'Jeff',
         lastName: 'Smith',
-        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/alxndrustinov/128.jpg'
+        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/alxndrustinov/128.jpg',
+        feedback: {}
     },
     {
         id: 2,
         firstName: 'Jesus',
         lastName: 'Samuel',
-        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/victorquinn/128.jpg'
+        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/victorquinn/128.jpg',
+        feedback: {}
     },
     {
         id: 3,
         firstName: 'Frank',
         lastName: 'Jones',
-        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/arashmanteghi/128.jpg'
+        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/arashmanteghi/128.jpg',
+        feedback: {}
     },
     {
         id: 4,
         firstName: 'Sarah',
         lastName: 'Williams',
-        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/deeenright/128.jpg'
+        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/deeenright/128.jpg',
+        feedback: {}
     },
     {
         id: 5,
         firstName: 'Lucy',
         lastName: 'Adams',
-        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/kevka/128.jpg'
+        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/kevka/128.jpg',
+        feedback: {}
     }];
 
 app.get('/', function (req, res) {
@@ -61,15 +66,25 @@ app.post('/user/add', function (req, res) {
    };
    person.push(newPerson);
    console.log('added new Employee');
-   return true;
+   res.send({done: true});
 
+});
+
+app.post('/user/question', function (req, res) {
+    console.log(req.body);
+    var index = person.findIndex(x => x.id == req.body.id);
+    console.log(person[index]);
+    var obj = req.body;
+    delete obj['id'];
+    person[index].feedback = obj;
+    res.send(person[index]);
 });
 
 app.post('/user/del', function (req, res) {
 
     person.splice(person.findIndex(x => x.id == req.body.id), 1);
-    console.log('delete id: ', req.body.id)
-    res.send({done: true})
+    console.log('delete id: ', req.body.id);
+    res.send({done: true});
 });
 
 

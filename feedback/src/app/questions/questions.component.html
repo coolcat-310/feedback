@@ -28,16 +28,18 @@
   <form [formGroup]="form">
     <label for="q4">Question 4: Please Rate employee's performance.</label>
     <div class="row">
-      <div class="col col-sm-4">
-      <input type="radio" name="q4" id="q4" formControlName="q4" value="belowAverage"> Below Average
+
+        <div class="col col-sm-4">
+          <input type="radio" name="q4" id="q4" formControlName="q4" value="belowAverage" ngModel [(ngModel)]="q4"> Below Average
+        </div>
+        <div class="col col-sm-4">
+          <input type="radio" name="q4" formControlName="q4" value="average" ngModel [(ngModel)]="q4"> Average
+        </div>
+        <div class="col col-sm-4">
+          <input type="radio" name="q4" formControlName="q4" value="aboveAverage" ngModel [(ngModel)]="q4"> Above Average
+        </div>
       </div>
-      <div class="col col-sm-4">
-      <input type="radio" name="q4" formControlName="q4" value="average"> Average
-      </div>
-      <div class="col col-sm-4">
-      <input type="radio" name="q4" formControlName="q4" value="aboveAverage"> Above Average
-      </div>
-    </div>
+
   </form>
   <hr style="border: 1px solid gray"/>
   <div class="row">
