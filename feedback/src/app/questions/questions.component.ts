@@ -18,8 +18,8 @@ export class QuestionsComponent implements OnInit {
   });
 
   url: string;
-  message: string;
-  username: string;
+  id: string;
+  employee = { firstName: '', lastName: ''};
 
   constructor(private http: Http) {
   }
@@ -31,12 +31,16 @@ export class QuestionsComponent implements OnInit {
 
   getNamefromURL() {
     const arr = this.url.split("/");
-    this.username = arr.pop();
-    console.log(this.username);
+    this.id = arr.pop();
+
     this.http.get('http://localhost:3000')
       .subscribe((res: Response) => {
         this.data = res.json();
-        console.log(this.data);
+        for (var i in this.data){
+          if(this.data[i].id == this.id){
+            this.employee = Object.assign({}, this.data[i])
+          }
+        }
     })
   }
 

@@ -123,7 +123,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   generateID(){
-    let num = Math.floor((Math.random()* 1000)+1);
+    let num = Math.floor((Math.random() * 1000) + 1);
     if(this.employees.findIndex(x => x.id == num) < 0){
       return num;
     }else{
