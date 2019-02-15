@@ -5,6 +5,7 @@ import { Http, Response } from "@angular/http";
 
 import * as faker from 'faker';
 
+
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -20,6 +21,7 @@ export class EmployeeComponent implements OnInit {
 
   constructor(private http: Http) {
     this.getEmployees();
+
   }
 
   ngOnInit() {
@@ -63,6 +65,7 @@ export class EmployeeComponent implements OnInit {
 
     this.employees.push(newEmployee);
     this.http.post('http://localhost:3000/user/add', {
+      id: newEmployee.id,
       firstName: newEmployee.firstName,
       lastName: newEmployee.lastName,
       avatar: newEmployee.avatar,
@@ -90,7 +93,6 @@ export class EmployeeComponent implements OnInit {
 
   }
 
-
   storeFirstName(firstName){
     this.newFirstName = firstName.viewModel;
   }
@@ -116,6 +118,7 @@ export class EmployeeComponent implements OnInit {
         }
         this.employees = arr;
         this.sortEmployees();
+        console.log(this.employees);
       });
   }
 

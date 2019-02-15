@@ -16,7 +16,7 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 const routes: Routes = [
   // basic routes
   {path: '', component: HomeComponent},
-  {path: 'question/:username', component: QuestionsComponent},
+  {path: 'employee/:username', component: QuestionsComponent},
   {path: 'employee', component: EmployeeComponent},
   {path: '**', component: NotFoundComponent}
 ];

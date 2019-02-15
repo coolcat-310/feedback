@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import { Http, Response } from "@angular/http";
 
 
 @Component({
@@ -11,7 +12,7 @@ export class QuestionsComponent implements OnInit {
   q1: string;
   q2: string;
   q3: string;
-
+  data: object;
   form = new FormGroup({
     q4: new FormControl('average'),
   });
@@ -20,7 +21,7 @@ export class QuestionsComponent implements OnInit {
   message: string;
   username: string;
 
-  constructor() {
+  constructor(private http: Http) {
   }
 
   ngOnInit() {
@@ -31,6 +32,12 @@ export class QuestionsComponent implements OnInit {
   getNamefromURL() {
     const arr = this.url.split("/");
     this.username = arr.pop();
+    console.log(this.username);
+    this.http.get('http://localhost:3000')
+      .subscribe((res: Response) => {
+        this.data = res.json();
+        console.log(this.data);
+    })
   }
 
   storeQ1(q1){
