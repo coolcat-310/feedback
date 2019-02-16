@@ -115,7 +115,10 @@ export class EmployeeComponent implements OnInit {
           newEmployee.avatar = this.data[i].avatar;
           newEmployee.id = this.data[i].id;
           newEmployee.comments = this.data[i].comment;
-          newEmployee.feedback = this.data[i].feedback;
+          if (this.data[i].feedback.q1) {
+            newEmployee.feedback = this.data[i].feedback;
+            newEmployee.hasFeedback = true;
+          }
           arr.push(newEmployee);
         }
         this.employees = arr;
@@ -132,5 +135,6 @@ export class EmployeeComponent implements OnInit {
       return this.generateID();
     }
   }
+
 
 }

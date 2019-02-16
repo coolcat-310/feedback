@@ -14,7 +14,12 @@
             <p class="card-text">{{employee.comments}}</p>
             <div class="row">
               <div class="col col-sm-6">
-                <a routerLink="{{employee.id}}" class="btn btn-info">Provide Feedback</a>
+                <div *ngIf="employee.hasFeedback;  else original">
+                <a routerLink="{{employee.id}}" class="btn btn-warning">Edit Feedback</a>
+                 </div>
+                  <ng-template #original>
+                    <a routerLink="{{employee.id}}" class="btn btn-success">Submit Feedback</a>
+                  </ng-template>
               </div>
               <div class="col col-sm-6">
                 <button class="btn btn-danger" (click)="deleteEmployee(employee.lastName, employee.firstName)">Delete

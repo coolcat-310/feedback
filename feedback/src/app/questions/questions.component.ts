@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Http, Response} from "@angular/http";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -21,7 +22,7 @@ export class QuestionsComponent implements OnInit {
   id: string;
   employee = {firstName: '', lastName: ''};
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
   }
 
   ngOnInit() {
@@ -40,6 +41,26 @@ export class QuestionsComponent implements OnInit {
           if (this.data[i].id == this.id) {
             this.employee = Object.assign({}, this.data[i])
           }
+        }
+        console.log(this.employee);
+        if(Object.entries(this.employee['feedback']).length > 0) {
+          var inputElement = <HTMLInputElement>document.getElementById('q1');
+          inputElement.value = this.employee['feedback'].q1;
+          this.q1 = this.employee['feedback'].q1;
+
+          inputElement = <HTMLInputElement>document.getElementById('q2');
+          inputElement.value = this.employee['feedback'].q2;
+          this.q2 = this.employee['feedback'].q2;
+
+          inputElement = <HTMLInputElement>document.getElementById('q3');
+          inputElement.value = this.employee['feedback'].q3;
+          this.q3 = this.employee['feedback'].q3;
+
+          this.form.setValue({
+            q4: this.employee['feedback'].q4
+          });
+
+          console.log(this.form);
         }
       })
   }
@@ -64,17 +85,19 @@ export class QuestionsComponent implements OnInit {
       q3: this.q3,
       q4: this.form.value.q4
     };
+    console.log(this.form);
     console.log(feedback);
     this.http.post('http://localhost:3000/user/question', feedback)
       .subscribe(res => {
         console.log(res);
+        this.router.navigate(['/employee'])
 
       });
   };
 
 
   cancelFeedback() {
-    console.log('cancel Feedback');
+    this.router.navigate(['/employee']);
   }
 
 
