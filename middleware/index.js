@@ -1,7 +1,22 @@
 var express = require('express');
+var mysql = require('mysql');
 var bodyParser = require('body-parser');
 var path = require('path');
 
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '541Hyde!',
+    database: 'employee_feedback'
+
+});
+
+db.connect(function (err) {
+    if(err){
+        console.log(err)
+    }
+    console.log('MySql connected...')
+});
 
 var app = express();
 
@@ -51,22 +66,26 @@ var person = [
         feedback: {}
     }];
 
-app.get('/', function (req, res) {
-    res.json(person);
-});
+
 
 
 app.post('/user/add', function (req, res) {
    var newPerson = {
-       id: req.body.id,
+       userID: req.body.id,
        firstName: req.body.firstName,
        lastName: req.body.lastName,
        avatar: req.body.avatar,
-       comment: req.body.comment
+       comment: req.body.comment,
+       isAdmin: 0
    };
-   person.push(newPerson);
-   console.log('added new Employee');
-   res.send({done: true});
+   var sql = 'INSERT INTO Users SET ?'
+    db.query(sql, newPerson,function(err, result){
+        if(err){
+            console.log(err);
+        }
+        console.log(result);
+        res.send(result);
+    });
 
 });
 
@@ -80,12 +99,29 @@ app.post('/user/question', function (req, res) {
     res.send(person[index]);
 });
 
+
 app.post('/user/del', function (req, res) {
 
     person.splice(person.findIndex(x => x.id == req.body.id), 1);
     console.log('delete id: ', req.body.id);
     res.send({done: true});
 });
+
+
+//Database Calls
+//get Users
+
+app.get('/users', function (req, res) {
+    var sql = 'SELECT * FROM users';
+    db.query(sql, function(err, result){
+        if(err){
+            console.log(err);
+        }
+        console.log(result);
+        res.send(result);
+    });
+});
+
 
 
 

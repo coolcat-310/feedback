@@ -106,18 +106,24 @@ export class EmployeeComponent implements OnInit {
   }
 
   getEmployees(){
-    this.http.get('http://localhost:3000/')
+    this.http.get('http://localhost:3000/users')
       .subscribe((res: Response) => {
         this.data = res.json();
+        console.log(this.data);
         let arr = [];
         for (var i in this.data){
           let newEmployee = new Employee(this.data[i].firstName, this.data[i].lastName);
           newEmployee.avatar = this.data[i].avatar;
-          newEmployee.id = this.data[i].id;
+          newEmployee.id = this.data[i].userID;
           newEmployee.comments = this.data[i].comment;
-          if (this.data[i].feedback.q1) {
-            newEmployee.feedback = this.data[i].feedback;
-            newEmployee.hasFeedback = true;
+          try{
+            if (this.data[i].feedback.q1) {
+              newEmployee.feedback = this.data[i].feedback;
+              newEmployee.hasFeedback = true;
+            }
+          } catch (err) {
+            console.log(err);
+            newEmployee.hasFeedback = false;
           }
           arr.push(newEmployee);
         }
