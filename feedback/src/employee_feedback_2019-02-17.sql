@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.21)
 # Database: employee_feedback
-# Generation Time: 2019-02-10 00:39:05 +0000
+# Generation Time: 2019-02-18 07:06:20 +0000
 # ************************************************************
 
 
@@ -20,24 +20,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Dump of table Feedbacks
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `Feedbacks`;
-
-CREATE TABLE `Feedbacks` (
-  `feedbackID` int(11) NOT NULL,
-  `feedbackName` varchar(255) DEFAULT NULL,
-  `feedbackComment` varchar(255) DEFAULT NULL,
-  `feedbackAnswers` varchar(255) DEFAULT NULL,
-  `userID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`feedbackID`),
-  KEY `userID` (`userID`),
-  CONSTRAINT `feedbacks_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `Users` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
 # Dump of table Users
 # ------------------------------------------------------------
 
@@ -48,15 +30,23 @@ CREATE TABLE `Users` (
   `lastName` varchar(255) DEFAULT NULL,
   `firstName` varchar(255) DEFAULT NULL,
   `isAdmin` tinyint(1) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `feedback` varchar(255) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
 
-INSERT INTO `Users` (`userID`, `lastName`, `firstName`, `isAdmin`)
+INSERT INTO `Users` (`userID`, `lastName`, `firstName`, `isAdmin`, `avatar`, `feedback`, `comment`)
 VALUES
-	(1,'nav','Juan',1);
+	(1,'Smith','Jeff',0,'https://s3.amazonaws.com/uifaces/faces/twitter/alxndrustinov/128.jpg',NULL,NULL),
+	(2,'Samuel','Jesus',0,'https://s3.amazonaws.com/uifaces/faces/twitter/victorquinn/128.jpg',NULL,NULL),
+	(3,'Jones','Frank',0,'https://s3.amazonaws.com/uifaces/faces/twitter/arashmanteghi/128.jpg','happy',NULL),
+	(4,'Williams','Sarah',0,'https://s3.amazonaws.com/uifaces/faces/twitter/deeenright/128.jpg',NULL,NULL),
+	(182,'gwerg','ergwer',0,'https://s3.amazonaws.com/uifaces/faces/twitter/llun/128.jpg',NULL,'gergewg'),
+	(604,'zzzzz','zzzz',0,'https://s3.amazonaws.com/uifaces/faces/twitter/benefritz/128.jpg',NULL,'wqefqwef');
 
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
