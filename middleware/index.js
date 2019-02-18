@@ -103,8 +103,15 @@ app.post('/user/question', function (req, res) {
 app.post('/user/del', function (req, res) {
 
     person.splice(person.findIndex(x => x.id == req.body.id), 1);
-    console.log('delete id: ', req.body.id);
-    res.send({done: true});
+    var sql = `DELETE FROM users Where userID = ${req.body.id}`;
+    db.query(sql, function(err, result){
+        if(err){
+            console.log(err);
+        }
+        console.log(result);
+        res.send(result);
+    });
+
 });
 
 
@@ -121,6 +128,8 @@ app.get('/users', function (req, res) {
         res.send(result);
     });
 });
+
+
 
 
 

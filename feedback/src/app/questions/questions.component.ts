@@ -34,33 +34,38 @@ export class QuestionsComponent implements OnInit {
     const arr = this.url.split("/");
     this.id = arr.pop();
 
-    this.http.get('http://localhost:3000')
+    this.http.get(`http://localhost:3000/users`)
       .subscribe((res: Response) => {
-        this.data = res.json();
+        let local = res['_body'];
+        this.data = JSON.parse(local);
         for (var i in this.data) {
-          if (this.data[i].id == this.id) {
+          if (this.data[i].userID == this.id) {
             this.employee = Object.assign({}, this.data[i])
           }
         }
         console.log(this.employee);
-        if(Object.entries(this.employee['feedback']).length > 0) {
-          var inputElement = <HTMLInputElement>document.getElementById('q1');
-          inputElement.value = this.employee['feedback'].q1;
-          this.q1 = this.employee['feedback'].q1;
+        try {
+          if (Object.entries(this.employee['feedback']).length > 0) {
+            var inputElement = <HTMLInputElement>document.getElementById('q1');
+            inputElement.value = this.employee['feedback'].q1;
+            this.q1 = this.employee['feedback'].q1;
 
-          inputElement = <HTMLInputElement>document.getElementById('q2');
-          inputElement.value = this.employee['feedback'].q2;
-          this.q2 = this.employee['feedback'].q2;
+            inputElement = <HTMLInputElement>document.getElementById('q2');
+            inputElement.value = this.employee['feedback'].q2;
+            this.q2 = this.employee['feedback'].q2;
 
-          inputElement = <HTMLInputElement>document.getElementById('q3');
-          inputElement.value = this.employee['feedback'].q3;
-          this.q3 = this.employee['feedback'].q3;
+            inputElement = <HTMLInputElement>document.getElementById('q3');
+            inputElement.value = this.employee['feedback'].q3;
+            this.q3 = this.employee['feedback'].q3;
 
-          this.form.setValue({
-            q4: this.employee['feedback'].q4
-          });
+            this.form.setValue({
+              q4: this.employee['feedback'].q4
+            });
 
-          console.log(this.form);
+            console.log(this.form);
+          }
+        }catch (e) {
+          console.log(e);
         }
       })
   }
